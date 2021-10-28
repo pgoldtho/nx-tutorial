@@ -1,0 +1,16 @@
+<mat-toolbar color="primary" class="nav-bar mat-elevation-z2">
+  <mat-label>Phrase</mat-label>
+  <span class="spacer"></span>
+  <ng-container>
+    <mat-icon>language</mat-icon>
+    <button mat-button [matMenuTriggerFor]="menu" data-cy="languageSelect" >
+      {{siteLanguage}}
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" >
+      <a mat-menu-item href="/en" data-cy="selectEn">English</a>
+      <a mat-menu-item href="/fr" data-cy="selectFr">Français</a>
+      <a mat-menu-item href="/de" data-cy="selectDe">Deutsch</a>
+    </mat-menu>
+  </ng-container>
+</mat-toolbar>

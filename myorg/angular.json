@@ -8,12 +8,16 @@
       "architect": {
         "build": {
           "builder": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/api",
             "main": "apps/api/src/main.ts",
             "tsConfig": "apps/api/tsconfig.app.json",
-            "assets": ["apps/api/src/assets"]
+            "assets": [
+              "apps/api/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -37,14 +41,20 @@
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/api/**/*.ts"]
+            "lintFilePatterns": [
+              "apps/api/**/*.ts"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/api"],
+          "outputs": [
+            "coverage/apps/api"
+          ],
           "options": {
             "jestConfig": "apps/api/jest.config.js",
             "passWithNoTests": true
@@ -60,14 +70,20 @@
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/data/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/data/**/*.ts"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/data"],
+          "outputs": [
+            "coverage/libs/data"
+          ],
           "options": {
             "jestConfig": "libs/data/jest.config.js",
             "passWithNoTests": true
@@ -75,6 +91,165 @@
         }
       },
       "tags": []
+    },
+    "i18n-demo": {
+      "projectType": "application",
+      "root": "apps/i18n-demo",
+      "sourceRoot": "apps/i18n-demo/src",
+      "prefix": "myorg",
+      "i18n": {
+        "locales": {
+          "en": "src/translate/messages.en.xlf",
+          "fr": "src/translate/messages.fr.xlf",
+          "de": "src/translate/messages.de.xlf"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/apps/i18n-demo",
+            "index": "apps/i18n-demo/src/index.html",
+            "main": "apps/i18n-demo/src/main.ts",
+            "polyfills": "apps/i18n-demo/src/polyfills.ts",
+            "tsConfig": "apps/i18n-demo/tsconfig.app.json",
+            "assets": [
+              "apps/i18n-demo/src/favicon.ico",
+              "apps/i18n-demo/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/i18n-demo/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/i18n-demo/src/environments/environment.ts",
+                  "with": "apps/i18n-demo/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            },
+            "en": {
+              "localize": ["en"]
+            },
+            "fr": {
+              "localize": ["fr"]
+            },
+            "de": {
+              "localize": ["de"]
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "i18n-demo:build:production"
+            },
+            "development": {
+              "browserTarget": "i18n-demo:build:development"
+            },
+            "en": {
+              "browserTarget": "i18n-demo:build:en"
+            },
+            "fr": {
+              "browserTarget": "i18n-demo:build:fr"
+            },
+            "de": {
+              "browserTarget": "i18n-demo:build:de"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "i18n-demo:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/i18n-demo/src/**/*.ts",
+              "apps/i18n-demo/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/i18n-demo"
+          ],
+          "options": {
+            "jestConfig": "apps/i18n-demo/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "i18n-demo-e2e": {
+      "root": "apps/i18n-demo-e2e",
+      "sourceRoot": "apps/i18n-demo-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/i18n-demo-e2e/cypress.json",
+            "devServerTarget": "i18n-demo:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "i18n-demo:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "apps/i18n-demo-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": [
+        "i18n-demo"
+      ]
     },
     "todos": {
       "projectType": "application",
@@ -84,15 +259,22 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/todos",
             "index": "apps/todos/src/index.html",
             "main": "apps/todos/src/main.ts",
             "polyfills": "apps/todos/src/polyfills.ts",
             "tsConfig": "apps/todos/tsconfig.app.json",
-            "assets": ["apps/todos/src/favicon.ico", "apps/todos/src/assets"],
-            "styles": ["apps/todos/src/styles.css"],
+            "assets": [
+              "apps/todos/src/favicon.ico",
+              "apps/todos/src/assets"
+            ],
+            "styles": [
+              "apps/todos/src/styles.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -160,7 +342,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/todos"],
+          "outputs": [
+            "coverage/apps/todos"
+          ],
           "options": {
             "jestConfig": "apps/todos/jest.config.js",
             "passWithNoTests": true
@@ -189,14 +373,20 @@
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/todos-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/todos-e2e/**/*.{js,ts}"
+            ]
           }
         }
       },
       "tags": [],
-      "implicitDependencies": ["todos"]
+      "implicitDependencies": [
+        "todos"
+      ]
     },
     "ui": {
       "projectType": "library",
@@ -206,7 +396,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/ui"],
+          "outputs": [
+            "coverage/libs/ui"
+          ],
           "options": {
             "jestConfig": "libs/ui/jest.config.js",
             "passWithNoTests": true
@@ -215,7 +407,10 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/ui/src/**/*.ts", "libs/ui/src/**/*.html"]
+            "lintFilePatterns": [
+              "libs/ui/src/**/*.ts",
+              "libs/ui/src/**/*.html"
+            ]
           }
         }
       },
