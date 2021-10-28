@@ -2,7 +2,7 @@
 
 Sandbox environment for testing Nrwl Nx featured. Includes 2 apps `todos` and `i18-demo` under an organization workspace called `myorg`.
 
-The todos app is the result of following the [Nx tutorial](https://nx.dev/l/a/tutorial/01-create-application). i18-demo is based on [Phrase.com blog post](https://phrase.com/blog/posts/angular-9-tutorial-on-i18n/). It extends it by adding cypress based e2e tests, configuring the unit tests to run cleanly and fixing some esLint error in the tutorial code.
+The todos app is the result of following the [Nx tutorial](https://nx.dev/l/a/tutorial/01-create-application). i18-demo is based on a [Phrase.com blog post](https://phrase.com/blog/posts/angular-9-tutorial-on-i18n/). It extends it by adding cypress based e2e tests, configuring the unit tests to run cleanly and fixing some esLint error in the tutorial code.
 
 ## Bookmarks for useful links
 
